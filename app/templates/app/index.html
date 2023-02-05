@@ -1,5 +1,71 @@
 {% extends 'app/main.html' %}
+{% load static %}
 
 {% block mycontent %}
-<h2>Informaation about ammeter</h2>
+<div class="output">
+    55.6 mA
+</div>
+<div class="container">
+
+    <div class="device_info line_container jc_sp-btw">
+
+        <div class="device border_field list">
+            <div class="device_name middle_text">Амперметр</div>
+            <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
+        </div>
+
+        <div class="middle_text">
+            <form id="Connect" method="get" action="">
+                <input class="button middle_text" type="submit" form="Connect" value="Подключить"/>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="group_container line_container jc_sp-btw">
+
+        
+        <form id="Send_ampers" method="get" action="">
+            <div class="group">
+                <div class="thin_text">Ток</div>
+                
+                <div class="interact">
+                    <div class="line_container middle_text">
+                        <input class="border_field small middle_text" type="text" id="ampers" 
+                            name="ampers">
+                        <div class="border_field small list">
+                            <div class="middle_text">mA</div>
+                            <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
+                        </div>
+                    </div>
+                    <div class="line_container">
+                        <input class="button middle_text" type="submit" 
+                                form="Send_ampers" value="Отправить"/>
+                    </div> 
+                </div>   
+            </div>
+        </form>
+            
+        <form id="Send_volts" method="get" action="">
+            <div class="group">
+                <div class="thin_text">Предельное напряжение</div>
+                <div class="interact">
+                    <div class="line_container">
+                        <input class="border_field small middle_text" type="text" id="volts" 
+                            name="volts">
+                        <div class="border_field small list">
+                            <div class="middle_text">mV</div>
+                            <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
+                        </div>
+                    </div>
+                    <div class="line_container">
+                            <input class="button middle_text" type="submit" 
+                                    form="Send_volts" value="Отправить"/>
+                    </div> 
+                </div>   
+            </div>
+        </form>
+
+    </div>
+</div>
 {% endblock %}

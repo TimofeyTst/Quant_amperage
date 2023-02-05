@@ -9,8 +9,22 @@
     <title>Ampermetr</title>
 </head>
 <body>
-    <h1>Ampermetr</h1>
+    <nav>
+        <ul class="navbar middle_text line_container jc_sp-btw">
+            <li>
+                <div class="logo">
+                    <img src="{% static 'app/img/FMN_logo.PNG' %}" />
+                    <p>FMN lab</p>
+                </div>
+            </li>
+            <li> 
+                <div class="status success border_field">Status connected</div>
+            </li>
+        </ul>
+    </nav>
+    <main>
     {% block mycontent %}
     {% endblock %}
+    </main>
 </body>
 </html>
