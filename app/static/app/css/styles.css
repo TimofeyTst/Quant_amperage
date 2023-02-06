@@ -68,7 +68,7 @@ main{
     border-radius: 20px;
     border: 1px solid #7A7A7A;
 }
-.navbar .status.success{
+.navbar .status.connected{
     color: #00FF19;
 }
 .output{

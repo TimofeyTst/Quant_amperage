@@ -3,7 +3,7 @@
 
 {% block mycontent %}
 <div class="output">
-    55.6 mA
+    {{device.value}}
 </div>
 <div class="container">
 
@@ -21,7 +21,10 @@
         </div>
 
         <div class="middle_text">
-            <form id="Connect" method="get" action="">
+            {% block connectform %}
+            <form id="Connect" method="post" action="">
+            {% endblock %}
+                {% csrf_token %}
                 <input class="button middle_text" type="submit" form="Connect" value="Подключить"/>
             </form>
         </div>
@@ -30,14 +33,17 @@
 
     <div class="group_container line_container jc_sp-btw">
         
+        {% block amper_form %}
         <form id="Send_ampers" method="post" action="">
+        {% endblock %}
+            {% csrf_token %}
             <div class="group">
                 <div class="thin_text">Ток</div>
                 
                 <div class="interact">
                     <div class="line_container middle_text">
-                        <input class="border_field small middle_text" type="text" id="ampers" 
-                            name="ampers">
+                        <input class="border_field small middle_text" type="number" id="ampers" 
+                            name="ampers" placeholder="{{ device.amper_value}}">
                         <div class="border_field small list">
                             <div class="middle_text">mA</div>
                             <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
@@ -50,14 +56,17 @@
                 </div>   
             </div>
         </form>
-            
-        <form id="Send_volts" method="get" action="">
+        
+        {% block volts_form %}
+        <form id="Send_volts" method="post" action="">
+        {% endblock %}
+            {% csrf_token %}
             <div class="group">
                 <div class="thin_text">Предельное напряжение</div>
                 <div class="interact">
                     <div class="line_container">
-                        <input class="border_field small middle_text" type="text" id="volts" 
-                            name="volts">
+                        <input class="border_field small middle_text" type="number" id="volts" 
+                            name="volts" placeholder="{{ device.volt_value }}">
                         <div class="border_field small list">
                             <div class="middle_text">mV</div>
                             <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
