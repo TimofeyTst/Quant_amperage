@@ -57,7 +57,7 @@ main{
     margin-right: 10px;
 }
 .navbar .status{
-    width: 234px;
+    min-width: 234px;
     color: red;
 }
 .border_field{
@@ -97,12 +97,14 @@ main{
 }
 .device_info{
     height: 44px;
-    width: 322px;
+    min-width: 322px;
     padding: 0px;
     margin-bottom: 11px;
 }
 .device {
-    width: 168px;
+    min-width: 168px;
+    margin-right: 10px;
+    padding: 0px 27px 0px 10px;
 }
 .list img{
     position: absolute;

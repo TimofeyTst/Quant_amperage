@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'Keithley_K6220A.apps.KeithleyK6220AConfig',
 ]
 
 MIDDLEWARE = [

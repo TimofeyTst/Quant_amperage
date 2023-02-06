@@ -10,8 +10,14 @@
     <div class="device_info line_container jc_sp-btw">
 
         <div class="device border_field list">
-            <div class="device_name middle_text">Амперметр</div>
+            <div class="device_name middle_text">{{device.name}}</div>
             <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
+            <div class="devices" style="position: absolute; display: none;
+                                        justify-content: center; flex-direction:column;">
+                <a href="{% url 'home' %}">home</a>
+                <a href="{% url 'Keithley_K6220A' %}">Keithley_K6220A</a>
+                <a href="{% url 'home' %}">home</a>
+            </div>          
         </div>
 
         <div class="middle_text">
@@ -23,9 +29,8 @@
     </div>
 
     <div class="group_container line_container jc_sp-btw">
-
         
-        <form id="Send_ampers" method="get" action="">
+        <form id="Send_ampers" method="post" action="">
             <div class="group">
                 <div class="thin_text">Ток</div>
                 

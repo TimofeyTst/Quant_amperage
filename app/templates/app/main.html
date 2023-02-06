@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' type='text/css' href="{% static 'app/css/styles.css' %}"/>
-    <title>Ampermetr</title>
+    <title>Device</title>
 </head>
 <body>
     <nav>
@@ -18,7 +18,7 @@
                 </div>
             </li>
             <li> 
-                <div class="status success border_field">Status connected</div>
+                <div class="status success border_field">Status: {{device.status}}</div>
             </li>
         </ul>
     </nav>
