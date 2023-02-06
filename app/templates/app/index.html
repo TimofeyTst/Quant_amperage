@@ -11,12 +11,11 @@
 
         <div class="device border_field list">
             <div class="device_name middle_text">{{device.name}}</div>
-            <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
-            <div class="devices" style="position: absolute; display: none;
-                                        justify-content: center; flex-direction:column;">
-                <a href="{% url 'home' %}">home</a>
-                <a href="{% url 'Keithley_K6220A' %}">Keithley_K6220A</a>
-                <a href="{% url 'home' %}">home</a>
+            <img class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" onclick="device_tag_open(this)"/>
+            <div id="devices">
+                <a class="border_field middle_text" href="{% url 'home' %}">Not selected</a>
+                <a class="border_field middle_text" href="{% url 'Keithley_K6220A' %}">Keithley K6220A</a>
+                <a class="border_field middle_text" href="{% url 'home' %}">Yokogawa GS210</a>
             </div>          
         </div>
 
@@ -46,7 +45,7 @@
                             name="ampers" placeholder="{{ device.amper_value}}">
                         <div class="border_field small list">
                             <div class="middle_text">mA</div>
-                            <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
+                            <img class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" onclick="values_tag_open(this)"/>
                         </div>
                     </div>
                     <div class="line_container">
@@ -69,7 +68,7 @@
                             name="volts" placeholder="{{ device.volt_value }}">
                         <div class="border_field small list">
                             <div class="middle_text">mV</div>
-                            <img class="svg" src="{% static 'app/svg/chevron-down.svg' %}"/>
+                            <img class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" onclick="values_tag_open(this)" />
                         </div>
                     </div>
                     <div class="line_container">
