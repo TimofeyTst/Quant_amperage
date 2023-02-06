@@ -217,3 +217,17 @@ main{
     z-index: 1;
     transform: translateY(65%);
 }
+#devices::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+#devices::-webkit-scrollbar-track {
+    border-radius: 12px;
+    background-color: rgb(217, 217, 217, 0.5);
+}
+#devices::-webkit-scrollbar-thumb {
+    background: #bebebe;
+    border-radius: 12px;
+    border: none;
+    z-index: 0;
+}
