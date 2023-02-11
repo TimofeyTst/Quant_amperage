@@ -43,10 +43,11 @@
                     <div class="line_container middle_text">
                         <input class="border_field small middle_text" type="number" id="ampers" 
                             name="ampers" placeholder="{{ device.amper_value}}">
-                        <div class="border_field small list">
-                            <div class="middle_text">mA</div>
-                            <img class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" onclick="values_tag_open(this)"/>
-                        </div>
+                        <select name="ampers_type" class="border_field small list middle_text">
+                            <option value="mA">mA</option>
+                            <option value="A">A</option>
+                            <option value="MA">MA</option>
+                        </select>
                     </div>
                     <div class="line_container">
                         <input class="button middle_text" type="submit" 
@@ -66,10 +67,11 @@
                     <div class="line_container">
                         <input class="border_field small middle_text" type="number" id="volts" 
                             name="volts" placeholder="{{ device.volt_value }}">
-                        <div class="border_field small list">
-                            <div class="middle_text">mV</div>
-                            <img class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" onclick="values_tag_open(this)" />
-                        </div>
+                        <select name="volts_type" class="border_field small list middle_text">
+                            <option value="mV">mV</option>
+                            <option value="V">V</option>
+                            <option value="MV">MV</option>
+                        </select>
                     </div>
                     <div class="line_container">
                             <input class="button middle_text" type="submit" 

@@ -176,6 +176,7 @@ main{
 }
 .border_field.list{
     position: relative;
+    width: auto;
 }
 .group .interact .line_container{
     margin-bottom: 5px;
