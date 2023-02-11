@@ -60,7 +60,7 @@ def update_a(request):
         # k6220.set_current(request.POST['ampers'])
         # print(type(request.POST['ampers']))
         # device['value'] = k6220.get_current()
-        device['value'] = request.POST['ampers'] + request.POST['ampers_type']
+        device['value'] = request.POST['ampers'] + ' ' + request.POST['ampers_type']
         device['amper_value'] = 37.8
 
         context = {
@@ -72,8 +72,7 @@ def update_v(request):
      if request.method == 'POST':
         # k6220.set_compliance(request.POST['volts'])
         # device['value'] = k6220.get_current()
-        print(request.POST['volts_type'])
-        device['value'] = '99.9 ' + request.POST['volts_type']
+        device['value'] = request.POST['volts'] + ' ' + request.POST['volts_type']
         device['volt_value'] = request.POST['volts']
         context = {
             'device': device, 

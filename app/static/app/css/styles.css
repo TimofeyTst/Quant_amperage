@@ -194,7 +194,7 @@ main{
     flex-direction: column;
     overflow-y: scroll;
 
-    transition: 0.8s;
+    transition: 0.4s;
     min-width: 188px;
     height: 0px;
     opacity: 0;
