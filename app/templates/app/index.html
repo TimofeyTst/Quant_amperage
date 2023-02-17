@@ -7,7 +7,7 @@
 </div>
 <div class="container">
 
-    <div class="device_info line_container jc_sp-btw">
+    <div class="device_info line_container jc_center">
 
         <div class="device border_field list" onclick="device_tag_open(this)">
             <div class="device_name middle_text">{{device.name_replace}}</div>
@@ -24,11 +24,27 @@
             <form id="Connect" method="post" action="">
             {% endblock %}
                 {% csrf_token %}
+                <button type="submit" class="power-button">
                 {% if device.connected == 1 %}
-                    <input class="button middle_text" type="submit" form="Connect" value="Отключить"/>
+                    {% comment %} <input class="button middle_text" type="submit" form="Connect" value="Отключить"/> {% endcomment %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="on" viewBox="0 0 512 512">
+                        <title>Power</title>
+                        <path d="M378 108a191.41 191.41 0 0170 148c0 106-86 192-192 192S64 362 64 256a192 192 0 0169-148M256 64v192" 
+                            fill="none" width="3px" stroke="currentColor" stroke-linecap="round" 
+                            stroke-linejoin="round" stroke-width="62"/>
+                    </svg>
+                    <div class="circle on"></div>
                 {% else %}
-                    <input class="button middle_text" type="submit" form="Connect" value="Подключить"/>
+                    {% comment %} <input class="button middle_text" type="submit" form="Connect" value="Подключить"/> {% endcomment %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="off" viewBox="0 0 512 512">
+                        <title>Power</title>
+                        <path d="M378 108a191.41 191.41 0 0170 148c0 106-86 192-192 192S64 362 64 256a192 192 0 0169-148M256 64v192" 
+                            fill="none" stroke="currentColor" stroke-linecap="round" 
+                            stroke-linejoin="round" stroke-width="62"/>
+                    </svg>
+                    <div class="circle off"></div>
                 {% endif %}
+                </button>
             </form>
         </div>
 

@@ -237,3 +237,62 @@ main{
     border: none;
     z-index: 0;
 }
+/* стили для кнопки с SVG-изображением */
+.power-button {
+    width: 44px;
+    height: 44px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #D9D9D9;    
+    border: 3px solid #7A7A7A;
+    border-radius: 50%;
+
+    padding: 0px;
+    transition: 0.5s;
+}
+.power-button svg{
+    width: 23px;
+    height: 23px;
+    transition: 0.5s;
+}
+.power-button svg.on {
+    color: #fff;
+}
+.power-button svg.off {
+    color: #7A7A7A;
+}
+/* стили для изменения цвета кнопки при наведении на нее курсора мыши */
+.power-button:hover {
+    cursor: pointer;
+}
+.power-button:hover svg.on {
+    color: #7A7A7A;
+}
+.power-button:hover svg.off {
+    color: #fff;
+}
+
+/* green or red light */
+.power-button .circle {
+    position: absolute;
+    bottom: 3px;
+    align-self: center;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+.power-button .circle.on{
+    background: red;
+}
+.power-button .circle.off{
+    background: #00FF19;
+}
+.power-button:hover .circle.on{
+    background: #00FF19;
+}
+.power-button:hover .circle.off{
+    background: red;
+}
