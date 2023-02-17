@@ -4,9 +4,12 @@ from django.shortcuts import render
 device = { 'name':'Not selected',
             'name_replace': 'Not selected',
             'status': 'disconnected',
+            'connected': 0,
             'value': '--- --',
             'amper_value': '0',
             'volt_value': '0',
+            'unit_a': 'mA',
+            'unit_v': 'V',
         }
 
 def index(request):

@@ -284,15 +284,15 @@ main{
     border-radius: 50%;
     transition: 0.5s;
 }
-.power-button .circle.on{
+.power-button .circle.off{
     background: red;
 }
-.power-button .circle.off{
-    background: #00FF19;
-}
-.power-button:hover .circle.on{
+.power-button .circle.on{
     background: #00FF19;
 }
 .power-button:hover .circle.off{
+    background: #00FF19;
+}
+.power-button:hover .circle.on{
     background: red;
 }
