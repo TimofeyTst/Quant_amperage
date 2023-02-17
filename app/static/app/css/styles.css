@@ -76,8 +76,13 @@ main{
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 59px;
-    width: 260px;
+
+    overflow-wrap: anywhere;
+
+    min-height: 59px;
+    padding: 5px;
+    min-width: 250px;
+    max-width: 392px;
     border-radius: 20px;
     border: 3px solid #7A7A7A;
     font-weight: 400;
@@ -192,7 +197,7 @@ main{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: hidden;
 
     transition: 0.4s;
     min-width: 188px;
@@ -209,7 +214,7 @@ main{
     background: rgb(164, 164, 164, 0.2);
 }
 #devices.open {
-    height: 135px;
+    height: 154px; /* 135 */
     border-radius: 0px 0px 20px 20px;
     background: #fff;
     padding: 5px;

@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
     path('Keithley_K6220A/', include('Keithley_K6220A.urls')),
+    path('Yokogawa_GS210/', include('Yokogawa_GS210.urls')),
 ]

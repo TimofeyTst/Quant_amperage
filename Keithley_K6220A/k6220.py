@@ -1,4 +1,4 @@
-from  drivers import instr
+from Keithley_K6220A import instr
 from time import sleep
 
 class K6220(instr.Instr):
@@ -63,6 +63,13 @@ class K6220(instr.Instr):
     #OUTPut [:STAT]?
 
     def set_current(self, current):
+        if abs(current)>20e-3:
+            self.set_range(1e-1)
+        else:
+            self.set_range(1e-2)
+            print(1)
+
+        
         if (abs(current) <= self.get_range()):
             self.write("SOUR:CURR:AMPL {0}".format(current))
         else:

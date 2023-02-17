@@ -9,13 +9,13 @@
 
     <div class="device_info line_container jc_sp-btw">
 
-        <div class="device border_field list">
-            <div class="device_name middle_text">{{device.name}}</div>
-            <img class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" onclick="device_tag_open(this)"/>
+        <div class="device border_field list" onclick="device_tag_open(this)">
+            <div class="device_name middle_text">{{device.name_replace}}</div>
+            <img id = "svg_1" class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" />
             <div id="devices">
                 <a class="border_field middle_text" href="{% url 'home' %}">Not selected</a>
                 <a class="border_field middle_text" href="{% url 'Keithley_K6220A' %}">Keithley K6220A</a>
-                <a class="border_field middle_text" href="{% url 'home' %}">Yokogawa GS210</a>
+                <a class="border_field middle_text" href="{% url 'Yokogawa_GS210' %}">Yokogawa GS210</a>
             </div>          
         </div>
 
@@ -24,7 +24,11 @@
             <form id="Connect" method="post" action="">
             {% endblock %}
                 {% csrf_token %}
-                <input class="button middle_text" type="submit" form="Connect" value="Подключить"/>
+                {% if device.connected == 1 %}
+                    <input class="button middle_text" type="submit" form="Connect" value="Отключить"/>
+                {% else %}
+                    <input class="button middle_text" type="submit" form="Connect" value="Подключить"/>
+                {% endif %}
             </form>
         </div>
 
@@ -42,11 +46,10 @@
                 <div class="interact">
                     <div class="line_container middle_text">
                         <input class="border_field small middle_text" type="number" id="ampers" 
-                            name="ampers" placeholder="{{ device.amper_value}}">
-                        <select name="ampers_type" class="border_field small list middle_text">
-                            <option value="mA">mA</option>
-                            <option value="A">A</option>
-                            <option value="MA">MA</option>
+                            name="ampers" value="{{ device.amper_value }}" step="0.01">
+                        <select name="ampers_type" class="border_field small list middle_text" selected="uA">
+                            <option value="mA" {% if device.unit_a == 'mA' %} selected {% endif %}>mA</option>
+                            <option value="uA" {% if device.unit_a == 'uA' %} selected {% endif %}>uA</option>
                         </select>
                     </div>
                     <div class="line_container">
@@ -66,11 +69,10 @@
                 <div class="interact">
                     <div class="line_container">
                         <input class="border_field small middle_text" type="number" id="volts" 
-                            name="volts" placeholder="{{ device.volt_value }}">
+                            name="volts" value="{{ device.volt_value }}" step="0.01">
                         <select name="volts_type" class="border_field small list middle_text">
-                            <option value="mV">mV</option>
-                            <option value="V">V</option>
-                            <option value="MV">MV</option>
+                            <option value="V" {% if device.unit_v == 'V' %} selected {% endif %}>V</option>
+                            <option value="mV" {% if device.unit_v == 'mV' %} selected {% endif %}>mV</option>
                         </select>
                     </div>
                     <div class="line_container">

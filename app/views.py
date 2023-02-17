@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 device = { 'name':'Not selected',
+            'name_replace': 'Not selected',
             'status': 'disconnected',
             'value': '--- --',
             'amper_value': '0',

@@ -1,0 +1,14 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+{% block amper_form %}
+    <form id="Send_ampers" method="post" action="update_a/">
+{% endblock %}
+
+{% block volts_form %}
+    <form id="Send_volts" method="post" action="update_v/">
+{% endblock %}
+
+{% block connectform %}
+<form id="Connect" method="post" action="/{{device.name}}/connect/">
+{% endblock %}
