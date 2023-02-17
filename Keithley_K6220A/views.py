@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from time import sleep
-from .k6220 import *
+# from .k6220 import *
 
 
 def set_value():
-    value = k6220.get_current()
+    # value = k6220.get_current()
+    value = 6e-6 # Commit this
     if abs(value) >= 1e-3:
         suffix = "mA"
         factor = 1e3
@@ -17,19 +18,21 @@ def set_value():
 
 
 def is_current_on():
-    if k6220.query("OUTPut?") == "1":
-        return 1
-    else:
-        return 0
+    # if k6220.query("OUTPut?") == "1":
+    #     return 1
+    # else:
+    #     return 0
+    return True
 
 def is_connect():
-    if k6220.query('*IDN?') == 'KEITHLEY INSTRUMENTS INC.,MODEL 6221,4358011,D03  /700x ':
-        return 1
-    else:
-        return 0
+    # if k6220.query('*IDN?') == 'KEITHLEY INSTRUMENTS INC.,MODEL 6221,4358011,D03  /700x ':
+    #     return 1
+    # else:
+    #     return 0
+    return True
 
 
-k6220 = K6220('GPIB0::12::INSTR')
+# k6220 = K6220('GPIB0::12::INSTR')
 device = { 'name':'Keithley_K6220A',
             'name_replace': 'Keithley K6220A',
             'status': 'disconnected',
@@ -53,7 +56,8 @@ units = {
 # Должен сразу проверять подключение и узнавать текущее значение
 def index(request):
     if is_current_on() == 1:
-        device['volt_value'] = k6220.get_compliance()
+        # device['volt_value'] = k6220.get_compliance()
+        device['volt_value'] = 9.0 # Comment this
         device['value'] = set_value()
         device['amper_value'] =  device['value'][:-2]
     
@@ -70,14 +74,13 @@ def connect(request):
     if request.method == 'POST':
         if is_current_on() == 1:
             print("Is_connect = 1 from connect")
-            k6220.output_off()
+            # k6220.output_off()
             device['connected'] = 0
-            device['status'] = 'disconnected' # Must be connecting
+            device['status'] = 'disconnected'
         else:
-            k6220.output_on()
+            # k6220.output_on()
             device['connected'] = 1
-            # device['amper_value'] =  device['value']
-            device['status'] = 'connected' # Must be connecting
+            device['status'] = 'connected'
 
         context = {
             'device': device, 
@@ -88,11 +91,8 @@ def connect(request):
 
 def update_a(request):
      if request.method == 'POST' and is_connect() == 1:
-        # ampers = f"CURRent {request.POST['ampers']}{units[request.POST['ampers_type']]}"
-        # k6220.write(ampers)
         ampers = float(request.POST['ampers'] + units[request.POST['ampers_type']])
-        # print("ampers ssetted =", ampers)
-        k6220.set_current(ampers)
+        # k6220.set_current(ampers)
         device['amper_value'] = request.POST['ampers']
         device['unit_a'] = request.POST['ampers_type']
         device['value'] = set_value()
@@ -104,11 +104,9 @@ def update_a(request):
      
 def update_v(request):
      if request.method == 'POST' and is_connect() == 1:
-        # volts = f"CURRent {request.POST['volts']}{units[request.POST['volts_type']]}" #not important
         volts = 0 if request.POST['volts'] == '' else float(request.POST['volts'])
         
-        # print("volts = ", volts)
-        k6220.set_compliance(volts)
+        # k6220.set_compliance(volts)
         device['volt_value'] = request.POST['volts']
         device['unit_v'] = request.POST['volts_type']
 
