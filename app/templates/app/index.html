@@ -25,7 +25,7 @@
             {% endblock %}
                 {% csrf_token %}
                 <button type="submit" class="power-button">
-                {% if device.connected == 1 %}
+                {% if device.current_on == 1 %}
                     {% comment %} <input class="button middle_text" type="submit" form="Connect" value="Отключить"/> {% endcomment %}
                     <svg xmlns="http://www.w3.org/2000/svg" class="on" viewBox="0 0 512 512">
                         <title>Power</title>

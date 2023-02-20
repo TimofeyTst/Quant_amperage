@@ -267,12 +267,12 @@ main{
 .power-button:hover {
     cursor: pointer;
 }
-.power-button:hover svg.on {
+/* .power-button:hover svg.on {
     color: #7A7A7A;
 }
 .power-button:hover svg.off {
     color: #fff;
-}
+} */
 
 /* green or red light */
 .power-button .circle {
@@ -290,9 +290,9 @@ main{
 .power-button .circle.on{
     background: #00FF19;
 }
-.power-button:hover .circle.off{
+/* .power-button:hover .circle.off{
     background: #00FF19;
 }
 .power-button:hover .circle.on{
     background: red;
-}
+} */
