@@ -268,13 +268,17 @@ class Yokogawa_GS210(Instrument):
     	else:
     		print("Go in voltage mode first.")
 
-
-
     def clear(self):
         """
         Clear the event register, extended event register, and error queue.
         """
         self._visainstrument.write("*CLS")
+
+    def close(self):
+        """
+        Clear the event register, extended event register, and error queue.
+        """
+        self.rm.close()
 
 
     # TODO:

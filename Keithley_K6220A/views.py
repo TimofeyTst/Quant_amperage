@@ -4,11 +4,11 @@ from time import sleep
 from .k6220 import *
 from app.utils import formatValue
 
+k6220 = K6220('GPIB0::12::INSTR')
 
 def connect_device():
     try:
-        k6220 = K6220('GPIB0::12::INSTR')
-        return k6220
+        return k6220.query('*IDN?') == 'KEITHLEY INSTRUMENTS INC.,MODEL 6221,4358011,D03  /700x '
     except Exception as e:
         return 0
 
@@ -16,8 +16,7 @@ def connect_device():
     
 # Должен сразу проверять подключение и узнавать текущее значение
 def index(request):
-    k6220 = connect_device()
-    if k6220:
+    if connect_device():
         device = { 'name': 'Keithley_K6220A',
                 'name_replace': 'Keithley K6220A',
                 'status': 'connected',
@@ -46,8 +45,7 @@ def index(request):
 # Должен подключать и узнавать текущее значение
 def connect(request):
     if request.method == 'POST':
-        k6220 = connect_device()
-        if k6220:
+        if connect_device():
             if k6220.query("OUTPut?") == "1":
                 k6220.output_off()
             else:
@@ -60,8 +58,7 @@ def connect(request):
 
 def update_a(request):
      if request.method == 'POST':
-        k6220 = connect_device()
-        if k6220:
+        if connect_device():
             units = {
                 "mA":"e-3",
                 "uA":"e-6",
@@ -73,8 +70,7 @@ def update_a(request):
      
 def update_v(request):
      if request.method == 'POST':
-        k6220 = connect_device()
-        if k6220:
+        if connect_device():
             volts = 0 if request.POST['volts'] == '' else float(request.POST['volts'])
             k6220.set_compliance(volts)
 
