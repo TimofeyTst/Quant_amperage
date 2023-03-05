@@ -13,20 +13,21 @@
             <div class="device_name middle_text">{{device.name_replace}}</div>
             <img id = "svg_1" class="svg" src="{% static 'app/svg/chevron-back-outline.svg' %}" />
             <div id="devices">
-                <a class="border_field middle_text" href="{% url 'home' %}">Not selected</a>
                 <a class="border_field middle_text" href="{% url 'Keithley_K6220A' %}">Keithley K6220A</a>
                 <a class="border_field middle_text" href="{% url 'Yokogawa_GS210' %}">Yokogawa GS210</a>
+                <a class="border_field middle_text" href="{% url 'home' %}">Not selected</a>
             </div>          
         </div>
 
         <div class="middle_text">
-            {% block connectform %}
-            <form id="Connect" method="post" action="">
-            {% endblock %}
+            {% if device.name != 'Not selected' and device.status == 'connected' %}
+                <form id="Connect" method="post" action="/{{device.name}}/connect/">
+            {% else %}
+                <form id="Connect" method="post" action="">
+            {% endif %}
                 {% csrf_token %}
                 <button type="submit" class="power-button">
                 {% if device.current_on == 1 %}
-                    {% comment %} <input class="button middle_text" type="submit" form="Connect" value="Отключить"/> {% endcomment %}
                     <svg xmlns="http://www.w3.org/2000/svg" class="on" viewBox="0 0 512 512">
                         <title>Power</title>
                         <path d="M378 108a191.41 191.41 0 0170 148c0 106-86 192-192 192S64 362 64 256a192 192 0 0169-148M256 64v192" 
@@ -35,7 +36,6 @@
                     </svg>
                     <div class="circle on"></div>
                 {% else %}
-                    {% comment %} <input class="button middle_text" type="submit" form="Connect" value="Подключить"/> {% endcomment %}
                     <svg xmlns="http://www.w3.org/2000/svg" class="off" viewBox="0 0 512 512">
                         <title>Power</title>
                         <path d="M378 108a191.41 191.41 0 0170 148c0 106-86 192-192 192S64 362 64 256a192 192 0 0169-148M256 64v192" 
@@ -55,6 +55,12 @@
         {% block amper_form %}
         <form id="Send_ampers" method="post" action="">
         {% endblock %}
+        <!-- {% if device.name != 'Not selected' and device.status == 'connected' %}
+        <form id="Send_ampers" method="post" action="update_a/">
+        {% else %}
+        <form id="Send_ampers" method="post" action="">
+        {% endif %} -->
+
             {% csrf_token %}
             <div class="group">
                 <div class="thin_text">Ток</div>
@@ -79,6 +85,11 @@
         {% block volts_form %}
         <form id="Send_volts" method="post" action="">
         {% endblock %}
+        <!-- {% if device.name != 'Not selected' and device.status == 'connected' %}
+        <form id="Send_volts" method="post" action="update_v/">
+        {% else %}
+        <form id="Send_volts" method="post" action="">
+        {% endif %} -->
             {% csrf_token %}
             <div class="group">
                 <div class="thin_text">Предельное напряжение</div>

@@ -56,8 +56,10 @@ class Yokogawa_GS210(Instrument):
         '''Create a default Yokogawa_GS210 object as a current source'''
         Instrument.__init__(self, 'Yokogawa_GS210', tags=['physical'])
         self._address = address
-        rm = visa.ResourceManager()
-        self._visainstrument = rm.open_resource(self._address)
+        self.rm = visa.ResourceManager()
+        print('AFTER VISA RESOURCES')
+        self._visainstrument = self.rm.open_resource(self._address)
+        print('AFTER VISA INSTRUMENT')
 
         current_range = (-200e-3, 200e-3)
         voltage_range = (-32, 32)
@@ -96,6 +98,7 @@ class Yokogawa_GS210(Instrument):
         #self.set_voltage_compliance(volt_compliance)
         #self.set_current(0)
         #self.set_status(1)
+        print('END INITIAL')
 
     def get_id(self):
         '''Get basic info on device'''

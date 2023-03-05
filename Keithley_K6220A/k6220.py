@@ -67,7 +67,6 @@ class K6220(instr.Instr):
             self.set_range(1e-1)
         else:
             self.set_range(1e-2)
-            print(1)
 
         
         if (abs(current) <= self.get_range()):
