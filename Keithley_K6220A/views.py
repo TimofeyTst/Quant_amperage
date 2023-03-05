@@ -4,9 +4,10 @@ from time import sleep
 from .k6220 import *
 from app.utils import formatValue
 
-k6220 = K6220('GPIB0::12::INSTR')
+k6220 = None
 
 def connect_device():
+    global k6220
     try:
         return k6220.query('*IDN?') == 'KEITHLEY INSTRUMENTS INC.,MODEL 6221,4358011,D03  /700x '
     except Exception as e:
@@ -16,7 +17,15 @@ def connect_device():
     
 # Должен сразу проверять подключение и узнавать текущее значение
 def index(request):
-    if connect_device():
+    global k6220
+    if k6220 is None:
+        try:
+            k6220 = K6220('GPIB0::12::INSTR')
+        except Exception as e:
+            yoko = None
+
+
+    if k6220 and connect_device():
         device = { 'name': 'Keithley_K6220A',
                 'name_replace': 'Keithley K6220A',
                 'status': 'connected',
@@ -28,6 +37,9 @@ def index(request):
                 'unit_v': 'V',
             }
     else:
+        k6220 = None
+
+        # Здесь по плану k6220 обнулился после выключения
         device = { 'name': 'Keithley_K6220A',
                 'name_replace': 'Keithley K6220A',
                 'status': 'disconnected',
@@ -45,7 +57,8 @@ def index(request):
 # Должен подключать и узнавать текущее значение
 def connect(request):
     if request.method == 'POST':
-        if connect_device():
+        global k6220
+        if k6220 and connect_device():
             if k6220.query("OUTPut?") == "1":
                 k6220.output_off()
             else:
@@ -58,7 +71,8 @@ def connect(request):
 
 def update_a(request):
      if request.method == 'POST':
-        if connect_device():
+        global k6220
+        if k6220 and connect_device():
             units = {
                 "mA":"e-3",
                 "uA":"e-6",
@@ -70,7 +84,8 @@ def update_a(request):
      
 def update_v(request):
      if request.method == 'POST':
-        if connect_device():
+        global k6220
+        if k6220 and connect_device():
             volts = 0 if request.POST['volts'] == '' else float(request.POST['volts'])
             k6220.set_compliance(volts)
 

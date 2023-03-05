@@ -274,12 +274,18 @@ class Yokogawa_GS210(Instrument):
         """
         self._visainstrument.write("*CLS")
 
-    def close(self):
+    def is_enabled(self):
         """
         Clear the event register, extended event register, and error queue.
         """
-        self.rm.close()
-
+        print("IS ENABLED BEFORE")
+        try:
+            self._visainstrument.query("*IDN?")
+            print("IS ENABLED success")
+            return True
+        except Exception as e:
+            print("IS ENABLED error")
+            return False
 
     # TODO:
     #       Дописать переключение режимов CURRENT/VOLTAGE
