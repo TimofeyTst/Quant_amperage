@@ -38,7 +38,6 @@ def index(request):
             }
     else:
         k6220 = None
-
         # Здесь по плану k6220 обнулился после выключения
         device = { 'name': 'Keithley_K6220A',
                 'name_replace': 'Keithley K6220A',
@@ -54,7 +53,7 @@ def index(request):
     return render(request, 'Keithley_K6220A/index.html', {'device': device})
 
 
-# Должен подключать и узнавать текущее значение
+# Должен подключать ток и узнавать текущее значение
 def connect(request):
     if request.method == 'POST':
         global k6220

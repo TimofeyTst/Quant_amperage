@@ -6,22 +6,22 @@ from app.utils import formatValue
 
 yoko = None
 
+def connect_device():
+    global yoko
+    try:
+        return yoko.get_id() == 'YOKOGAWA,GS211,91VB13481,2.02\n'
+    except Exception as e:
+        return 0
+
 def index(request):
     global yoko
     if yoko is None:
         try:
-            # print("Moment 0")
-            # rm = visa.ResourceManager()
-            # print("Moment 1")
-            # rm.open_resource('USB0::0x0B21::0x0039::91VB13481::0::INSTR')
-            # print("Moment 2")
-            yoko = Yokogawa_GS210('USB0::0x0B21::0x0039::91VB13481::INSTR')
-            print("Moment 3")
-
+            yoko = Yokogawa_GS210('GPIB0::1::INSTR')
         except Exception as e:
             yoko = None
 
-    if yoko and yoko.is_enabled():
+    if yoko and connect_device():
         device = { 'name': 'Yokogawa_GS210',
             'name_replace': 'Yokogawa GS210',
             'status': 'connected',
@@ -34,7 +34,6 @@ def index(request):
         }
     else:
         yoko = None
-
         # Здесь по плану yoko обнулился после выключения
         device = { 'name': 'Yokogawa_GS210',
                 'name_replace': 'Yokogawa GS210',
@@ -51,11 +50,11 @@ def index(request):
     return render(request, 'Yokogawa_GS210/index.html', {'device': device})
 
 
-# Должен подключать и узнавать текущее значение
+# Должен подключать ток и узнавать текущее значение
 def connect(request):
     if request.method == 'POST':
         global yoko
-        if yoko and yoko.is_enabled():
+        if yoko and connect_device():
             if yoko.get_status():
                 yoko.set_status(0)
             else:
@@ -68,7 +67,7 @@ def connect(request):
 def update_a(request):
      if request.method == 'POST':
         global yoko
-        if yoko and yoko.is_enabled():
+        if yoko and connect_device():
             units = {
                 "mA":"e-3",
                 "uA":"e-6",
@@ -81,7 +80,7 @@ def update_a(request):
 def update_v(request):
      if request.method == 'POST':
         global yoko
-        if yoko and yoko.is_enabled():
+        if yoko and connect_device():
             volts = 0 if request.POST['volts'] == '' else float(request.POST['volts'])
             yoko.set_voltage_compliance(volts)
 

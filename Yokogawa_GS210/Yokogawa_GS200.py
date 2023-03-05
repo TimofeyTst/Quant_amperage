@@ -274,19 +274,6 @@ class Yokogawa_GS210(Instrument):
         """
         self._visainstrument.write("*CLS")
 
-    def is_enabled(self):
-        """
-        Clear the event register, extended event register, and error queue.
-        """
-        print("IS ENABLED BEFORE")
-        try:
-            self._visainstrument.query("*IDN?")
-            print("IS ENABLED success")
-            return True
-        except Exception as e:
-            print("IS ENABLED error")
-            return False
-
     # TODO:
     #       Дописать переключение режимов CURRENT/VOLTAGE
     #       Дописать недостающие команды и параметры в кострукторе для напряжения ( add_parameter('voltage', ...) и операции do_set_voltage и иже с ним)
